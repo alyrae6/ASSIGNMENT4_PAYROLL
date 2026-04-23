@@ -31,4 +31,39 @@ class PayrollReport:
         if lowest is not None:
             print(f"Lowest paid: {lowest.name} (${lowest.calculate_gross_pay():.2f})")
 
-    def generate
+    def generate_report_file(self, filename):
+        with open(filename, "w") as f:
+            f.write("Payroll Report\n\n")
+            f.write("Employees:\n")
+            f.write("Name\tID\tRate\tHours\tGross Pay\n")
+
+            for emp in self.processor.employees:
+                gross = emp.calculate_gross_pay()
+                f.write(
+                    f"{emp.name}\t{emp.employee_id}\t"
+                    f"${emp.hourly_rate:.2f}\t{emp.hours_worked:.1f}\t"
+                    f"${gross:.2f}\n"
+                )
+
+            f.write("\nSummary:\n")
+            count = self.processor.get_employee_count()
+            total = self.processor.calculate_total_payroll()
+            avg = self.processor.calculate_average_pay()
+            highest = self.processor.find_highest_paid()
+            lowest = self.processor.find_lowest_paid()
+
+            f.write(f"Total employees: {count}\n")
+            f.write(f"Total payroll: ${total:.2f}\n")
+            f.write(f"Average pay: ${avg:.2f}\n")
+
+            if highest is not None:
+                f.write(
+                    f"Highest paid: {highest.name} "
+                    f"(${highest.calculate_gross_pay():.2f})\n"
+                )
+
+            if lowest is not None:
+                f.write(
+                    f"Lowest paid: {lowest.name} "
+                    f"(${lowest.calculate_gross_pay():.2f})\n"
+                )

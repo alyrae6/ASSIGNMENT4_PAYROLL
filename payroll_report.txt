@@ -1,0 +1,9 @@
+Payroll Report
+
+Employees:
+Name	ID	Rate	Hours	Gross Pay
+
+Summary:
+Total employees: 0
+Total payroll: $0.00
+Average pay: $0.00
